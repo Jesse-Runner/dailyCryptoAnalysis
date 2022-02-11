@@ -1,40 +1,29 @@
 import "./App.css";
 
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-var Highcharts = require("highcharts");
+import Highcharts from "highcharts";
+import HighchartsReact from "highcharts-react-official";
 
 export const App = () => {
-  const chart = Highcharts.chart("container", {
+  const options = {
     chart: {
-      type: "bar",
+      type: "spline",
     },
     title: {
-      text: "Fruit Consumption",
-    },
-    xAxis: {
-      categories: ["Apples", "Bananas", "Oranges"],
-    },
-    yAxis: {
-      title: {
-        text: "Fruit eaten",
-      },
+      text: "My chart",
     },
     series: [
       {
-        name: "Jane",
-        data: [1, 0, 4],
-      },
-      {
-        name: "John",
-        data: [5, 7, 3],
+        data: [1, 2, 1, 4, 3, 6],
       },
     ],
-  });
-
-  return (
-    <div className="App">
-      <div style={{ width: "400px", height: "400px" }}>{chart}</div>
+  };
+  const chart = (
+    <div>
+      <HighchartsReact highcharts={Highcharts} options={options} />
     </div>
   );
+
+  return chart;
 };
