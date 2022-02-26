@@ -13,12 +13,11 @@ export const getTotalMarketCap = async () => {
 
   const response = await axios(axiosOptions);
 
-  const formattedResponseObject: MarketCapServicesType[] = response.data.map(
-    (day: MarketCapServicesType, index: number) => ({
-      x: index,
-      y: parseInt(day.market_cap),
-    })
+  const formattedResponseObject = response.data.map(
+    (day: MarketCapServicesType) => parseInt(day.market_cap)
   );
+
+  console.log(formattedResponseObject);
 
   return formattedResponseObject;
 };
