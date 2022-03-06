@@ -3,6 +3,7 @@ import "./App.css";
 import { DescriptionTile } from "./DescriptionTile";
 import { Header } from "./Header";
 import { MarketCapChart } from "./MarketCapChart";
+import { MarketSentimentChart } from "./MarketSentimentChart";
 
 export const App = () => {
   return (
@@ -18,6 +19,7 @@ export const App = () => {
         </div>
         <div className="Description-container">
           <DescriptionTile />
+          <MarketSentimentChart />
         </div>
       </div>
     </>
