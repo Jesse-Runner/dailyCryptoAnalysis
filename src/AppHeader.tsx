@@ -11,7 +11,7 @@ const styles: InlineStylesModel = {
   },
 };
 
-export const Header = () => {
+export const AppHeader = () => {
   return (
     <div style={styles.headerContainer}>
       <StockOutlined />
