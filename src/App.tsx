@@ -23,7 +23,7 @@ const styles: InlineStylesModel = {
   headerContainer: {
     padding: "20px 0px",
     width: "60vw",
-    margin: "auto",
+    marginLeft: "calc(20vw - 239px)",
     borderBottom: "1px solid rgba(164, 164, 164, 0.35)",
     marginBottom: "25px",
   },
