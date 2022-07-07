@@ -1,4 +1,4 @@
-import { Col, Dropdown, Menu, Row, Select } from "antd";
+import { Col, Row, Select } from "antd";
 import {
   fetchTop100Coins,
   getTotalMarketCap,
@@ -6,8 +6,6 @@ import {
 import { formatDate, formatMarketCap } from "./common/sharedFunctions";
 import { useEffect, useState } from "react";
 
-import { ReactComponent as BitcoinLogo } from "./images/bitcoin-btc-logo.svg";
-import { CaretDownOutlined } from "@ant-design/icons";
 import { GraphDatePicker } from "./components/Common/GraphDatePicker";
 import Highcharts from "highcharts/highstock";
 import HighchartsReact from "highcharts-react-official";
@@ -27,18 +25,19 @@ const styles: InlineStylesModel = {
   cryptoSelectorStyle: {
     // width: "15%",
     width: "max-content",
-    minWidth: "11%",
+    minWidth: "15%",
     backgroundColor: "#0a0c12",
     color: "white",
   },
   datePickerRow: {
     backgroundColor: "#0a0c12",
-    width: "60vw",
+    width: "59.9vw",
     // marginLeft: "calc(20vw - 239px)",
     marginBottom: "10px",
     display: "flex",
     flexFlow: "row wrap",
     justifyContent: "space-between",
+    borderBottom: "1px solid rgba(164,164,164, .5)",
   },
   datePickerTitle: {
     // width: "15%",
@@ -65,6 +64,13 @@ const styles: InlineStylesModel = {
     height: "20px",
     width: "20px",
   },
+  priceRow: {
+    color: "white",
+    paddingLeft: 10,
+    fontSize: 30,
+    fontWeight: 500,
+    marginBottom: "10px",
+  },
 };
 
 export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
@@ -78,8 +84,7 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
   // Responsible for fetching the market cap data
   useEffect(() => {
     const fetchMarketData = async () => {
-      const marketCapData = await getTotalMarketCap(selectedCrypto);
-      console.log("testeraooo", marketCapData);
+      const marketCapData = await getTotalMarketCap(selectedCrypto, "max");
       setFetchData(marketCapData);
     };
 
@@ -107,10 +112,7 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
   const options = {
     chart: {
       backgroundColor: "#0a0c12",
-      // borderColor: "rgba(164,164,164,.35)",
-      // borderRadius: 20,
-      // borderWidth: 1,
-      spacing: [0, 0, 0, 0],
+      spacing: [0, 10, 0, 10],
     },
     legend: {
       enabled: true,
@@ -121,11 +123,6 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
     lang: {
       numericSymbols: ["K", "M", "B", "T", "P", "E"],
     },
-    // title: {
-    //   align: "left",
-    //   text: "Crytpo Market Cap and Trendline",
-    //   y: 50,
-    // },
     tooltip: {
       backgroundColor: "rgba(3, 24, 150, .65)",
       borderColor: "rgba(3, 172, 252, 1)",
@@ -172,6 +169,25 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
     // },
   };
 
+  const priceOfSelectedCrypto = () => {
+    if (top100Coins !== null) {
+      const found = top100Coins.data.find(
+        (coin: any) => selectedCrypto === coin.id
+      );
+
+      if (found !== undefined) {
+        const convertToString = found.current_price.toLocaleString("en-us");
+        const addCommaWithRegex = convertToString
+          .toString()
+          .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+
+        return "$" + addCommaWithRegex;
+      } else {
+        return "Not Available";
+      }
+    }
+  };
+
   const crytpoMenuItems2 =
     top100Coins !== null
       ? top100Coins.data.map((menuOption: any) => {
@@ -181,26 +197,24 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
               value={menuOption.id}
               style={{ backgroundColor: "#0a0c12" }}
             >
-              <Row style={styles.datePickerTitle} align="middle" gutter={8}>
-                <Col style={styles.cryptoLogoContainer} span={4}>
+              <Row style={styles.datePickerTitle} align="middle">
+                <Col
+                  style={{
+                    fontSize: "20px",
+                    marginBottom: "0em",
+                    backgroundColor: "#0a0c12",
+                    fontWeight: 400,
+                    textAlign: "center",
+                    color: "white",
+                  }}
+                >
                   <img
                     alt={`${menuOption.name}-logo`}
                     src={menuOption.image}
-                    style={styles.logoStyle}
+                    style={{ ...styles.logoStyle, ...{ marginRight: "10px" } }}
                   />
-                </Col>
-                <Col span={20}>
-                  <h1
-                    style={{
-                      fontSize: "20px",
-                      marginBottom: "0em",
-                      backgroundColor: "#0a0c12",
-                      fontWeight: 400,
-                      textAlign: "center",
-                    }}
-                  >
-                    {menuOption.name}
-                  </h1>
+
+                  {menuOption.name}
                 </Col>
               </Row>
             </Select.Option>
@@ -209,19 +223,13 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
       : null;
 
   const cryptoSelected = (value: string) => {
-    console.log("value selected", value);
     setSelectedCrypto(value);
     setRefetchApi(true);
-  };
-
-  const cryptoSearch = (value: string) => {
-    console.log("value selected", value);
   };
 
   const crytpoSelector = (
     <Select
       onChange={cryptoSelected}
-      onSearch={cryptoSearch}
       style={styles.cryptoSelectorStyle}
       defaultValue={selectedCrypto}
       size={"large"}
@@ -239,6 +247,7 @@ export const MarketCapChart = ({ chartHeight }: MarketCapChartType) => {
           <GraphDatePicker />
         </div>
       </div>
+      <Row style={styles.priceRow}>{priceOfSelectedCrypto()}</Row>
       <HighchartsReact
         containerProps={{
           style: {

@@ -1,8 +1,6 @@
+import * as CSV from "csv-string";
+
 import axios, { AxiosRequestConfig } from "axios";
-import * as CSV from 'csv-string';
-
-
-import { MarketCapServicesType } from "../models/MarketCapServicesType";
 
 export const getMarketSentiment = async () => {
   const axiosOptions: AxiosRequestConfig = {
@@ -17,9 +15,7 @@ export const getMarketSentiment = async () => {
 
   const csvData = response.data;
   const parsedCsvData = CSV.parse(csvData);
-  const bitcoinLongTerm = parsedCsvData.map((data) => data[2])
-
-  console.log(bitcoinLongTerm);
+  const bitcoinLongTerm = parsedCsvData.map((data) => data[2]);
 
   return parsedCsvData;
 };

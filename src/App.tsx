@@ -7,6 +7,9 @@ import { InlineStylesModel } from "./models/InlineStyleModel";
 import { Layout } from "antd";
 import { MarketCapChart } from "./MarketCapChart";
 import { MarketSentimentChart } from "./MarketSentimentChart";
+import { MenuContextProvider } from "./components/Common/menu-context";
+import { PageSelector } from "./components/PageSelector";
+import { useState } from "react";
 
 const styles: InlineStylesModel = {
   contentContainer: {
@@ -24,43 +27,48 @@ const styles: InlineStylesModel = {
     padding: "20px 0px",
     width: "60vw",
     marginLeft: "calc(20vw - 239px)",
-    borderBottom: "1px solid rgba(164, 164, 164, 0.35)",
+    // borderBottom: "1px solid rgba(164, 164, 164, 0.35)",
     marginBottom: "25px",
+  },
+  header: {
+    height: "70px",
+    width: "100vw",
+    backgroundColor: "#0a0c12",
+    borderBottom: "1px solid rgba(164,164,164,.35)",
+  },
+  sider: {
+    borderRight: "1px solid rgba(164,164,164,.35)",
+    backgroundColor: "#0a0c12",
   },
 };
 
-const { Header, Footer, Sider, Content } = Layout;
+const { Header, Sider, Content } = Layout;
 
 export const App = () => {
+  const [selectedMenu, setSelectedMenu] = useState("dashboard");
+  const updateMenu = (menuOption: string) => {
+    setSelectedMenu(menuOption);
+  };
+
   return (
     <>
       <Layout>
-        <Header
-          style={{
-            height: "70px",
-            width: "100vw",
-            backgroundColor: "#0a0c12",
-            borderBottom: "1px solid rgba(164,164,164,.35)",
-          }}
-        >
+        <Header style={styles.header}>
           <AppHeader />
         </Header>
         <Layout>
-          <Sider
-            width={240}
-            style={{
-              borderRight: "1px solid rgba(164,164,164,.35)",
-              backgroundColor: "#0a0c12",
-            }}
-          >
-            <CollapsableMenu />
+          <Sider width={240} style={styles.sider}>
+            <MenuContextProvider
+              value={{
+                selectedMenu,
+                updateMenu,
+              }}
+            >
+              <CollapsableMenu />
+            </MenuContextProvider>
           </Sider>
           <Content style={styles.contentContainer}>
-            <h2 style={styles.headerContainer}>
-              <div style={styles.graphPageTitle}>{"Graphs"}</div>
-              <div></div>
-            </h2>
-            <MarketCapChart chartHeight={"650px"} />
+            <PageSelector menuSelected={selectedMenu} />
           </Content>
         </Layout>
       </Layout>

@@ -3,12 +3,15 @@ import {
   ContainerOutlined,
   DashboardOutlined,
   LineChartOutlined,
+  MessageOutlined,
   ReadOutlined,
 } from "@ant-design/icons";
 
 import { InlineStylesModel } from "./models/InlineStyleModel";
 import { Menu } from "antd";
+import { MenuContext } from "./components/Common/menu-context";
 import type { MenuProps } from "antd";
+import { useContext } from "react";
 
 const styles: InlineStylesModel = {
   mainMenuStyle: {
@@ -24,6 +27,8 @@ const styles: InlineStylesModel = {
 };
 
 export const CollapsableMenu = () => {
+  const { updateMenu } = useContext(MenuContext);
+
   type MenuItem = Required<MenuProps>["items"][number];
 
   function getItem(
@@ -43,18 +48,22 @@ export const CollapsableMenu = () => {
   }
 
   const items: MenuItem[] = [
-    getItem("Dashboard", "1", <AppstoreOutlined />),
-    getItem("Risk", "2", <DashboardOutlined />),
-    getItem("Graphs", "3", <LineChartOutlined />),
+    getItem("Dashboard", "dashboard", <AppstoreOutlined />),
+    getItem("Risk", "risk", <DashboardOutlined />),
+    getItem("Graphs", "graphs", <LineChartOutlined />),
     getItem("Articles", "4", <ReadOutlined />),
-    getItem("Discord", "5", <ContainerOutlined />),
+    getItem("Discord", "5", <MessageOutlined />),
   ];
+
+  const onMenuClick = (value: any) => {
+    updateMenu(value.key);
+  };
 
   return (
     <Menu
-      // onClick={onClick}
+      onClick={onMenuClick}
       style={styles.mainMenuStyle}
-      defaultSelectedKeys={["1"]}
+      defaultSelectedKeys={["dashboard"]}
       defaultOpenKeys={["sub1"]}
       mode="inline"
       items={items}

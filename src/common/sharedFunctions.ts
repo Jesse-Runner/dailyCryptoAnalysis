@@ -29,3 +29,15 @@ export const formatDate = (date: string) => {
   const dateWithoutDay = date.substring(date.indexOf(" "), date.length);
   return dateWithoutDay;
 };
+
+export const getDaysSinceYearBegan = () => {
+  const date = new Date();
+  return (
+    (Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()) -
+      Date.UTC(date.getFullYear(), 0, 0)) /
+    24 /
+    60 /
+    60 /
+    1000
+  );
+};
