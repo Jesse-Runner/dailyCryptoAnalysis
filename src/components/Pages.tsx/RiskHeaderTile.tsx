@@ -20,6 +20,7 @@ const styles: InlineStylesModel = {
     color: "white",
     marginLeft: "calc(20vw - 239px)",
     padding: 0,
+    marginTop: "1vh",
   },
   datePickerTitle: {
     backgroundColor: "#0a0c12",
@@ -149,9 +150,9 @@ export const RiskHeaderTile = ({ coinData }: any) => {
 
   return (
     <>
-      <h2 style={styles.headerContainer}>
+      {/* <h2 style={styles.headerContainer}>
         <div style={styles.dashboardPageTitle}>{"Risk"}</div>
-      </h2>
+      </h2> */}
       {crytpoSelector}
       <Row style={styles.riskTopTileContainer} align="middle">
         <Col span={8}>

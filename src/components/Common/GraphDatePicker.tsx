@@ -53,10 +53,25 @@ export const GraphDatePicker = ({
     if (selectedData === null) {
       fetchPriceData();
     }
-    // if (refetchApi) {
-    //   fetchMarketData();
-    //   setRefetchApi(false);
-    // }
+
+    let changeMade = false;
+    let priceInformationCopy = priceInformation;
+    const objectKeys = Object.keys(priceInformation);
+    objectKeys.forEach((key) => {
+      if (priceInformationCopy[key].isSelected && key !== selectedOption) {
+        priceInformationCopy[key].isSelected = false;
+        changeMade = true;
+      } else if (
+        !priceInformationCopy[key].isSelected &&
+        key === selectedOption
+      ) {
+        priceInformationCopy[key].isSelected = true;
+        changeMade = true;
+      }
+    });
+    if (changeMade) {
+      setPriceInformation({ ...priceInformationCopy });
+    }
   }, [
     priceInformation,
     selectedCoin.symbol,

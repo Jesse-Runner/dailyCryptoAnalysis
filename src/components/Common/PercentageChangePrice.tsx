@@ -37,9 +37,7 @@ const styles: InlineStylesModel = {
 };
 
 export const PercentageChangePrice = ({ coin }: PercentageChangeProps) => {
-  const [fetchData, setFetchData] = useState<MarketCapServicesType[] | null>(
-    null
-  );
+  const [fetchData, setFetchData] = useState<any | null>(null);
   const [lastCoin, setLastCoin] = useState(coin.id);
 
   const yearToDateLength = getDaysSinceYearBegan();
@@ -47,9 +45,7 @@ export const PercentageChangePrice = ({ coin }: PercentageChangeProps) => {
   const yearToDateChange =
     fetchData === null
       ? 0
-      : ((coin.market_cap_real - fetchData[0].marketCap) /
-          fetchData[0].marketCap) *
-        100;
+      : ((coin.market_cap_real - fetchData[0][1]) / fetchData[0][1]) * 100;
 
   useEffect(() => {
     const fetchMarketData = async () => {
@@ -57,7 +53,7 @@ export const PercentageChangePrice = ({ coin }: PercentageChangeProps) => {
         coin.id,
         yearToDateLength.toString()
       );
-      setFetchData(marketCapData);
+      setFetchData(marketCapData.market_caps);
     };
 
     if (fetchData === null) {

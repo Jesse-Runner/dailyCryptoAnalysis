@@ -23,14 +23,14 @@ export const RiskGraphs = ({ coinData }: any) => {
       <Row style={styles.graphsRow} justify="space-between">
         <Col>
           <RiskChart
-            chartHeight={"30vh"}
+            chartHeight={"22vh"}
             chartWidth={"28vw"}
             coinData={coinData}
           />
         </Col>
         <Col>
           <RiskChart
-            chartHeight={"30vh"}
+            chartHeight={"22vh"}
             chartWidth={"28vw"}
             coinData={coinData}
           />
@@ -39,14 +39,14 @@ export const RiskGraphs = ({ coinData }: any) => {
       <Row style={styles.graphsRow} justify="space-between">
         <Col>
           <RiskChart
-            chartHeight={"30vh"}
+            chartHeight={"22vh"}
             chartWidth={"28vw"}
             coinData={coinData}
           />
         </Col>
         <Col>
           <RiskChart
-            chartHeight={"30vh"}
+            chartHeight={"22vh"}
             chartWidth={"28vw"}
             coinData={coinData}
           />

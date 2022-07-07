@@ -37,15 +37,13 @@ const styles: InlineStylesModel = {
 };
 
 export const PercentageChangeMcap = ({ coin }: PercentageChangeProps) => {
-  const [fetchData, setFetchData] = useState<MarketCapServicesType[] | null>(
-    null
-  );
+  const [fetchData, setFetchData] = useState<any | null>(null);
   const [lastCoin, setLastCoin] = useState(coin.id);
 
   useEffect(() => {
     const fetchMarketData = async () => {
       const marketCapData = await getTotalMarketCap(coin.id, "max");
-      setFetchData(marketCapData);
+      setFetchData(marketCapData.market_caps);
     };
 
     if (fetchData === null) {
@@ -60,22 +58,22 @@ export const PercentageChangeMcap = ({ coin }: PercentageChangeProps) => {
   const sevenDayChange =
     fetchData === null
       ? 0
-      : ((coin.market_cap_real - fetchData[fetchData.length - 8].marketCap) /
-          fetchData[fetchData.length - 8].marketCap) *
+      : ((coin.market_cap_real - fetchData[fetchData.length - 8][1]) /
+          fetchData[fetchData.length - 8][1]) *
         100;
 
   const thirtyDayChange =
     fetchData === null
       ? 0
-      : ((coin.market_cap_real - fetchData[fetchData.length - 31].marketCap) /
-          fetchData[fetchData.length - 31].marketCap) *
+      : ((coin.market_cap_real - fetchData[fetchData.length - 31][1]) /
+          fetchData[fetchData.length - 31][1]) *
         100;
 
   const oneYearChange =
     fetchData === null
       ? 0
-      : ((coin.market_cap_real - fetchData[fetchData.length - 366].marketCap) /
-          fetchData[fetchData.length - 366].marketCap) *
+      : ((coin.market_cap_real - fetchData[fetchData.length - 366][1]) /
+          fetchData[fetchData.length - 366][1]) *
         100;
 
   const yearToDateLength = getDaysSinceYearBegan();
@@ -84,8 +82,8 @@ export const PercentageChangeMcap = ({ coin }: PercentageChangeProps) => {
     fetchData === null
       ? 0
       : ((coin.market_cap_real -
-          fetchData[fetchData.length - yearToDateLength - 1].marketCap) /
-          fetchData[fetchData.length - yearToDateLength - 1].marketCap) *
+          fetchData[fetchData.length - yearToDateLength - 1][1]) /
+          fetchData[fetchData.length - yearToDateLength - 1][1]) *
         100;
 
   return (

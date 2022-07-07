@@ -18,7 +18,9 @@ export const getTotalMarketCap = async (coin: string, days: string) => {
     })
   );
 
-  return response.data.market_caps;
+  console.log("TEST", response.data.market_caps[0][1]);
+
+  return response.data;
 };
 
 export const fetchTop100Coins = async () => {
