@@ -27,7 +27,7 @@ export const PageSelector = ({ menuSelected }: PageSelectorProps) => {
   const pageInView = () => {
     switch (menuSelected) {
       case "dashboard":
-        return <Dashboard />;
+        return <Dashboard coinData={top100Coins} />;
       case "risk":
         return <Risk coinData={top100Coins} />;
       case "graphs":

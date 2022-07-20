@@ -426,7 +426,7 @@ export const RiskChart = (chartProps: RiskChartProps) => {
           },
         }}
         highcharts={Highcharts}
-        options={test2}
+        options={options}
         constructorType={"stockChart"}
       />
       <Row style={styles.riskFooterTitle}>{"Risk"}</Row>

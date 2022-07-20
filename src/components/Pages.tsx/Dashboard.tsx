@@ -1,4 +1,5 @@
 import { InlineStylesModel } from "../../models/InlineStyleModel";
+import { DashboardTable } from "./Dashboard/DashboardTable";
 
 const styles: InlineStylesModel = {
   dashboardPageTitle: {
@@ -15,13 +16,15 @@ const styles: InlineStylesModel = {
   },
 };
 
-export const Dashboard = () => {
+export const Dashboard = ({ coinData }: any) => {
+  console.log("test", coinData);
   return (
     <>
       <h2 style={styles.headerContainer}>
         <div style={styles.dashboardPageTitle}>{"Dashboard"}</div>
       </h2>
-      {/* <div>dashboard</div> */}
+      <DashboardTable coinData={coinData} />
+      {/* <DashboardCharts  */}
     </>
   );
 };
