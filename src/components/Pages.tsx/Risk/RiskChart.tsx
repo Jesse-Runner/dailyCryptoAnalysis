@@ -67,7 +67,6 @@ const styles: InlineStylesModel = {
     flexFlow: "row wrap",
     // justifyContent: "space-between",
     borderBottom: "1px solid rgba(164,164,164, .5)",
-    zIndex: 10000,
   },
   datePickerContainer: {
     // maxWidth: "40%",

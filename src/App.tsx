@@ -41,7 +41,7 @@ export const App = () => {
           <AppHeader />
         </Header>
         <Layout>
-          <Sider width={240} style={styles.sider}>
+          {/* <Sider width={240} style={styles.sider}>
             <MenuContextProvider
               value={{
                 selectedMenu,
@@ -50,7 +50,7 @@ export const App = () => {
             >
               <CollapsableMenu />
             </MenuContextProvider>
-          </Sider>
+          </Sider> */}
           <Content style={styles.contentContainer}>
             <PageSelector menuSelected={selectedMenu} />
           </Content>

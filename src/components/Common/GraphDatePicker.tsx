@@ -7,6 +7,7 @@ import { fetchPriceInformation } from "../../services/RiskChartService";
 const styles: InlineStylesModel = {
   mainContainer: {
     width: "100%",
+    backgroundColor: "rgb(22,24,29)",
   },
 };
 
@@ -25,10 +26,7 @@ export const GraphDatePicker = ({
 
   useEffect(() => {
     const fetchPriceData = async () => {
-      const priceData = await fetchPriceInformation(
-        selectedCoin.symbol,
-        selectedOption
-      );
+      const priceData = await fetchPriceInformation("BTC", selectedOption);
       const updatedCategory = { data: priceData, isSelected: true };
       const objectKeys = Object.keys(priceInformation);
 
@@ -50,7 +48,7 @@ export const GraphDatePicker = ({
 
     const selectedData = priceInformation[selectedOption].data;
 
-    if (selectedData === null) {
+    if (selectedData === null && selectedCoin !== null) {
       fetchPriceData();
     }
 
@@ -72,12 +70,7 @@ export const GraphDatePicker = ({
     if (changeMade) {
       setPriceInformation({ ...priceInformationCopy });
     }
-  }, [
-    priceInformation,
-    selectedCoin.symbol,
-    selectedOption,
-    setPriceInformation,
-  ]);
+  }, [priceInformation, selectedCoin, selectedOption, setPriceInformation]);
 
   const onOptionChange = (option: any) => {
     setSelectedOption(option.target.value);

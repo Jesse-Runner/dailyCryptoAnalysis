@@ -114,24 +114,23 @@
 }
 
 .ant-select {
-  background-color: #0a0c12;
+  background-color: inherit;
   color: white;
 }
 
 .ant-select-selector {
-  background-color: #0a0c12;
+  background-color: inherit;
   color: white;
 }
 
 .ant-select:not(.ant-select-customize-input) .ant-select-selector {
-  background-color: #0a0c12;
+  background-color: inherit;
   color: white;
-  border: none;
-  /* border: 1px solid  rgba(164, 164, 164, 0.35) */
+  border: none
 }
 
 .ant-select-dropdown {
-  background-color: #0a0c12;
+  background-color: inherit;
   color: white;
 }
 
@@ -153,7 +152,7 @@ h1 {
 }
 
 .ant-radio-button-wrapper {
-  background-color: #0a0c12;
+  background-color: rgb(22,24,29);
   color: rgb(100,116,139);
   border: none;
 }
@@ -165,17 +164,17 @@ h1 {
 
 /* This handles the 2nd - N radio group items */
 .ant-radio-button-wrapper:not(:first-child)::before {
-  background-color:  #0a0c12;
+  background-color: rgb(22,24,29);
 }
 
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled) {
   color: white;
-  background-color: #0a0c12;
+  background-color: rgb(22,24,29);
 }
 
 .ant-radio-button-wrapper:hover {
   color: white;
-  background-color: rgba(29,41,57,1);
+  background-color: rgb(22,24,29);
 }
 
 .ant-radio-button-wrapper-checked:not(.ant-radio-button-wrapper-disabled):hover {

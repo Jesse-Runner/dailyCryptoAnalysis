@@ -29,15 +29,15 @@ export const PageSelector = ({ menuSelected }: PageSelectorProps) => {
       case "dashboard":
         return <Dashboard coinData={top100Coins} />;
       case "risk":
-        return <Risk coinData={top100Coins} />;
+      // return <Risk coinData={top100Coins} />;
       case "graphs":
-        return (
-          <RiskChart
-            chartWidth={"40vw"}
-            coinData={top100Coins}
-            chartHeight={"650px"}
-          />
-        );
+      // return (
+      //   <RiskChart
+      //     chartWidth={"40vw"}
+      //     coinData={top100Coins}
+      //     chartHeight={"650px"}
+      //   />
+      // );
       default:
         return <div>default</div>;
     }
